@@ -34,6 +34,19 @@ private:
     void OP_1nnn();
     // CALL addr - Call subroutine at nnn
     void OP_2nnn();
+    // SE Vx - Skip next instruction if Vx == kk
+    void OP_3xkk();
+    // SNE Vx - Skip next instruction if Vx != kk
+    void OP_4xkk();
+    // SE Vx, Vy - Skip next instrucion if Vx = Vy
+    void OP_5xy0();
+    // LD Vx, byte - Set Vx = vk
+    void OP_6xkk();
+    // ADD Vx, byte - Set Vx = Vx + kk
+    void OP_7xkk();
+    // LD Vx, Vy - Set Vx = Vy
+    void OP_8xy0();
+    //
 };
 
 #endif // CHIP8_H

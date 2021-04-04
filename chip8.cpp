@@ -61,23 +61,73 @@ void Chip8::LoadROM(char const* filename) {
     }
 }
 
+// CLS
 void Chip8::OP_00E0() {
     memset(video, 0, sizeof (video));
 }
 
+// RET
 void Chip8::OP_00EE() {
     --sp;
     pc = stack[sp];
 }
 
+// JP
 void Chip8::OP_1nnn() {
     uint16_t address = opcode & 0x0FFFu;
     pc = address;
 }
 
+// CALL
 void Chip8::OP_2nnn() {
     uint16_t address = opcode & 0x0FFFu;
     stack[sp] = pc;
     ++sp;
     pc = address;
 }
+
+// SE Vx
+void Chip8::OP_3xkk() {
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t byte = opcode & 0x00FFu;
+
+    if (registers[Vx] == byte) {
+        pc += 2;
+    }
+}
+
+// SNE Vx
+void Chip8::OP_4xkk() {
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t byte = opcode & 0x00FFu;
+
+    if (registers[Vx] != byte) {
+        pc += 2;
+    }
+}
+
+// SE Vx, Vy
+void Chip8::OP_5xy0() {
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+    if (registers[Vx] == registers[Vy]) {
+        pc += 2;
+    }
+}
+
+// LD Vx, byte
+void Chip8::OP_6xkk() {
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t byte = opcode & 0x00FFu;
+
+    registers[Vx] = byte;
+}
+
+// ADD Vx, byte
+void Chip8::OP_7xkk() {
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t byte = (opcode & 0x00F0u) >> 4u;
+    registers[Vx] += byte;
+}
+

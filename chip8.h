@@ -68,6 +68,10 @@ private:
     void OP_Annn();
     // JP V0, addr - Jump to location nnn + V0
     void OP_Bnnn();
+    // RND Vx, byte - Set Vx = random byte AND kk.
+    void OP_Cxkk();
+    // DRW Vx, Vy, nibble - Display n-byte sprite starting at memory location I at (Vx, Vy), set VF = collision.
+    void OP_Dxyn();
 };
 
 #endif // CHIP8_H

@@ -46,7 +46,28 @@ private:
     void OP_7xkk();
     // LD Vx, Vy - Set Vx = Vy
     void OP_8xy0();
-    //
+    // OR Vx, Vy - Set Vx = Vx OR Vy
+    void OP_8xy1();
+    // AND Vx, Vy - Set Vx = Vx AND Vy
+    void OP_8xy2();
+    // XOR Vx, Vy - Set Vx = Vx OR Vy
+    void OP_8xy3();
+    // ADD Vx, Vy - Set Vx = Vx + Vy, set VF = carry
+    void OP_8xy4();
+    // SUB Vx, Vy - Set Vx = Vx - Vy, set VF = NOT borrow
+    void OP_8xy5();
+    // SHR Vx {, Vy} - Set Vx = Vx SHR 1
+    void OP_8xy6();
+    // SUBN Vx, Vy Set Vx = Vy - Vx, set VF = NOT borrow.
+    void OP_8xy7();
+    // SHL Vx {, Vy} - Set Vx SHL 1
+    void OP_8xyE();
+    // SNE Vx, Vy - Skip next instruction if Vx != Vy
+    void OP_9xy0();
+    // LD I, addr - Set I = nnn
+    void OP_Annn();
+    // JP V0, addr - Jump to location nnn + V0
+    void OP_Bnnn();
 };
 
 #endif // CHIP8_H

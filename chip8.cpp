@@ -1,6 +1,5 @@
 #include "chip8.h"
 #include <fstream>
-// Tyler McAllister
 const unsigned int START_ADDRESS = 0x200;
 
 const unsigned int FONTSET_SIZE = 80;
